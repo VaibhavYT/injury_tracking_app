@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "363050986416",
+    "project_id": "injury-tracking",
+    "storage_bucket": "injury-tracking.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:363050986416:android:aa6dd1f40c2cb02fd08475",
+        "android_client_info": {
+          "package_name": "com.example.injury_tracking"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBE66_8E1p8GFtGev9KuDg1jVv8am0xLyw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
