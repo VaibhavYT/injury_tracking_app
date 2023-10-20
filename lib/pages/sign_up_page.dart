@@ -1,32 +1,42 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:injury_tracking/pages/forgot_password_page.dart';
-import 'package:injury_tracking/pages/sign_up_page.dart';
 
-class LoginPage extends StatefulWidget {
-  final VoidCallback showSignUpPage;
-  const LoginPage({Key? key, required this.showSignUpPage}) : super(key: key);
+class SignUpPage extends StatefulWidget {
+  final VoidCallback showLoginPage;
+  const SignUpPage({Key? key, required this.showLoginPage}) : super(key: key);
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<SignUpPage> createState() => _SignUpPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _SignUpPageState extends State<SignUpPage> {
   final _emailcontroller = TextEditingController();
   final _passwordcontroller = TextEditingController();
-
-  Future signIn() async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: _emailcontroller.text.trim(),
-        password: _passwordcontroller.text.trim());
-  }
+  final _confirmpasswordcontroller = TextEditingController();
 
   @override
   void dispose() {
     _emailcontroller.dispose();
     _passwordcontroller.dispose();
     super.dispose();
+  }
+
+  Future signUp() async {
+    if (passwordConfirmed()) {
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: _emailcontroller.text.trim(),
+          password: _passwordcontroller.text.trim());
+    } else {}
+  }
+
+  bool passwordConfirmed() {
+    if (_passwordcontroller.text.trim() ==
+        _confirmpasswordcontroller.text.trim()) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   @override
@@ -44,19 +54,18 @@ class _LoginPageState extends State<LoginPage> {
                 width: 300,
                 height: 300,
               ),
-              Text('HELLO AGAIN!',
+              Text('HELLO THERE!',
                   style:
                       GoogleFonts.bebasNeue(fontSize: 40, color: Colors.white)),
               const SizedBox(
                 height: 5,
               ),
-              Text('Welcome Back! you\'ve been missed',
+              Text('Register Now ',
                   style:
                       GoogleFonts.b612Mono(fontSize: 18, color: Colors.white)),
               const SizedBox(
                 height: 20,
               ),
-              //SECTION - email textfield 
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
                 child: TextField(
@@ -81,7 +90,6 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(
                 height: 10,
               ),
-              //SECTION - Password field
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 25.0, vertical: 5),
@@ -108,46 +116,56 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(
                 height: 10,
               ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return ForgotPasswordPage();
-                  }));
-                },
-                child: Text(
-                  'Forgot Password?',
-                  style: TextStyle(color: Colors.blue, fontSize: 18),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 25.0, vertical: 5),
+                child: TextField(
+                  controller: _confirmpasswordcontroller,
+                  obscureText: true,
+                  decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(color: Colors.white),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: const BorderSide(color: Colors.yellow),
+                      ),
+                      hintText: ' Confirm Password',
+                      border: InputBorder.none,
+                      fillColor: Colors.white,
+                      filled: true,
+                      contentPadding:
+                          const EdgeInsets.only(left: 15, top: 15, bottom: 15)),
                 ),
               ),
               const SizedBox(
-                height: 30,
+                height: 40,
               ),
               MaterialButton(
                 padding: const EdgeInsets.all(18),
-                onPressed: signIn,
+                onPressed: signUp,
                 color: Color.fromARGB(255, 222, 233, 8),
                 hoverColor: Colors.green,
                 focusColor: Colors.green,
-                child: const Text('Login'),
-              ),
-              const SizedBox(
-                height: 15,
+                child: const Text('Sign Up'),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
-                    'Not a member ?',
+                    'I am member ?',
                     style: TextStyle(color: Colors.white),
                   ),
                   const SizedBox(
                     width: 5,
                   ),
                   GestureDetector(
-                    onTap: widget.showSignUpPage,
+                    onTap: widget.showLoginPage,
                     child: const Text(
-                      'Register Now',
-                      style: TextStyle(color: Colors.blue),
+                      'Login',
+                      style:
+                          TextStyle(color: Color.fromARGB(255, 177, 243, 33)),
                     ),
                   ),
                 ],
