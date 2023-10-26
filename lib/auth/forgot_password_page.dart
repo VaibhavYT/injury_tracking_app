@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -24,10 +26,9 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
            showDialog(
           context: context,
           builder: (context) {
-            return AlertDialog(content: Text('Password res et link has been send check you mail'));
+            return  const AlertDialog(content: Text('Password reset link has been send check you mail'));
           });
     } on FirebaseAuthException catch (e) {
-      print(e);
       showDialog(
           context: context,
           builder: (context) {
@@ -49,7 +50,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 8.0),
             child: Text(
-              'Enter Your email o tht we can send email to reset the password',
+              'Enter Your email so that we can send email to reset the password',
               textAlign: TextAlign.center,
             ),
           ),
@@ -82,8 +83,8 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
           ),
           MaterialButton(
             onPressed: passwordReset,
-            child: const Text('Reset Password'),
             color: Colors.green,
+            child: const Text('Reset Password'),
           )
         ],
       ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:injury_tracking/pages/login_page.dart';
-import 'package:injury_tracking/pages/sign_up_page.dart';
+import 'package:injury_tracking/pages/auth_page/login_page.dart';
+import 'package:injury_tracking/pages/auth_page/sign_up_page.dart';
 
 class AuthPage extends StatefulWidget {
   const AuthPage({super.key});

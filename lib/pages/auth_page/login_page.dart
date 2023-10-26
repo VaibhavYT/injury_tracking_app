@@ -1,8 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:injury_tracking/pages/forgot_password_page.dart';
-import 'package:injury_tracking/pages/sign_up_page.dart';
+import 'package:injury_tracking/auth/forgot_password_page.dart';
 
 class LoginPage extends StatefulWidget {
   final VoidCallback showSignUpPage;
@@ -32,7 +31,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 70, 17, 185),
+      backgroundColor: const Color.fromARGB(255, 70, 17, 185),
       body: Center(
         child: SingleChildScrollView(
           child: Column(
@@ -111,10 +110,10 @@ class _LoginPageState extends State<LoginPage> {
               GestureDetector(
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return ForgotPasswordPage();
+                    return const ForgotPasswordPage();
                   }));
                 },
-                child: Text(
+                child: const Text(
                   'Forgot Password?',
                   style: TextStyle(color: Colors.blue, fontSize: 18),
                 ),
@@ -125,7 +124,7 @@ class _LoginPageState extends State<LoginPage> {
               MaterialButton(
                 padding: const EdgeInsets.all(18),
                 onPressed: signIn,
-                color: Color.fromARGB(255, 222, 233, 8),
+                color: const Color.fromARGB(255, 222, 233, 8),
                 hoverColor: Colors.green,
                 focusColor: Colors.green,
                 child: const Text('Login'),
